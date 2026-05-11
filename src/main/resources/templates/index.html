@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:include="fragments/header :: header"><title>Accidents</title></head>
+<body>
+<div class="container mt-5">
+    <div class="card shadow-sm p-4" style="border-radius: 12px;">
+        <h3 class="mb-3">About the Project</h3>
+        <p class="text-muted">
+            A web application for reporting and managing traffic violations, built with
+            <strong>Java</strong>, <strong>Spring MVC</strong>, <strong>Hibernate</strong>,
+            <strong>Thymeleaf</strong>, and <strong>PostgreSQL</strong>.
+        </p>
+        <p class="text-muted">
+            Users can submit violation reports with an address, car number, description,
+            and photo, while traffic inspectors can review reports and update their status.
+        </p>
+        <p class="text-muted">
+            The project demonstrates a classic server-side MVC architecture with
+            <em>controller → service → repository → database</em>, role-based interaction,
+            status management, image upload, and searchable violation records.
+        </p>
+    </div>
+</div>
+<footer th:include="fragments/footer :: footer"></footer>
+</body>
+</html>
