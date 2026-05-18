@@ -1,4 +1,5 @@
 # job4j_accidents
+[![Java CI with Maven](https://github.com/1oogabooga1/job4j_accidents/actions/workflows/maven.yml/badge.svg)](https://github.com/1oogabooga1/job4j_accidents/actions/workflows/maven.yml)
 
 ## About the Project
 
