@@ -25,6 +25,11 @@ public class SimpleAccidentService implements AccidentService {
     }
 
     @Override
+    public boolean edit(Accident accident) {
+        return repository.edit(accident);
+    }
+
+    @Override
     public Optional<Accident> findById(int id) {
         return repository.findById(id);
     }

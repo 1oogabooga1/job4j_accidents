@@ -2,8 +2,8 @@ package ru.job4j.accidents.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.service.AccidentService;
 import org.springframework.ui.Model;
 
@@ -19,5 +19,49 @@ public class AccidentController {
         model.addAttribute("accidents", accidentService.findAll());
         model.addAttribute("user", "Dmitrii");
         return "accidents/list";
+    }
+
+    @GetMapping("/create")
+    public String getCreationPage(Model model) {
+        model.addAttribute("user", "Dmitrii");
+        return "accidents/create";
+    }
+
+    @PostMapping("/create")
+    public String create(@ModelAttribute Accident accident) {
+        accidentService.create(accident);
+        return "redirect:/accidents/list";
+    }
+
+    @GetMapping("/{id}")
+    public String getById(@PathVariable int id, Model model) {
+        var acc = accidentService.findById(id);
+        if (acc.isEmpty()) {
+            model.addAttribute("message", "The accident was not found, incorrect id");
+            return "errors/404";
+        }
+        model.addAttribute("user", "Dmitrii");
+        model.addAttribute("accident", acc.get());
+        return "accidents/accident";
+    }
+
+    @PostMapping("/edit")
+    public String edit(@ModelAttribute Accident accident, Model model) {
+        var result = accidentService.edit(accident);
+        if (!result) {
+            model.addAttribute("message", "Some error occurred during edition");
+            return "errors/404";
+        }
+        return "redirect:/accidents/list";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable int id, Model model) {
+        var result = accidentService.delete(id);
+        if (!result) {
+            model.addAttribute("message", "Some error occurred during deleting this accident");
+            return "errors/404";
+        }
+        return "redirect:/accidents/list";
     }
 }

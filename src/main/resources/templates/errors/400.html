@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:include="fragments/header :: header">
+    <title>Bad Request</title>
+</head>
+<body>
+<div class="container mt-5 text-center">
+    <h1>400 - Bad Request</h1>
+    <p class="text-danger" th:text="${message}">
+        The request contains invalid data.
+    </p>
+    <a class="btn btn-primary" th:href="@{/accidents/list}">Go to posts</a>
+    <a class="btn btn-secondary" th:href="@{/}">Go home</a>
+</div>
+<footer th:include="fragments/footer :: footer"></footer>
+</body>
+</html>

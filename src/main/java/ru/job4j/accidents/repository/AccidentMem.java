@@ -38,8 +38,14 @@ public class AccidentMem implements AccidentRepository {
     }
 
     @Override
+    public boolean edit(Accident accident) {
+        return accidents.computeIfPresent(accident.getId(), (id, oldAccident) -> new Accident(oldAccident.getId(),
+                accident.getName(), accident.getDescription(), accident.getAddress())) != null;
+    }
+
+    @Override
     public Optional<Accident> findById(int id) {
-        return Optional.of(accidents.get(id));
+        return Optional.ofNullable(accidents.get(id));
     }
 
     @Override

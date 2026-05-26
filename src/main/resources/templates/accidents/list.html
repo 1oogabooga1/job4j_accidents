@@ -18,12 +18,23 @@
             <tbody>
             <tr th:each="accident : ${accidents}">
                 <td th:text="${accident.id}"></td>
-                <td th:text="${accident.name}"></td>
-                <td th:text="${accident.text}"></td>
+                <td>
+                    <a th:text="${accident.name}"
+                       th:href="@{/accidents/{accidentId}(accidentId=${accident.id})}">
+                    </a>
+                </td>
+                <td th:text="${accident.description}"></td>
                 <td th:text="${accident.address}"></td>
             </tr>
             </tbody>
         </table>
+    </div>
+    <div class="mb-3">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-end">
+                <a th:href="@{/accidents/create}" class="btn btn-primary">Add new accident</a>
+            </div>
+        </div>
     </div>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>

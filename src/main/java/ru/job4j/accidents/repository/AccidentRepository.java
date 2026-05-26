@@ -11,6 +11,8 @@ public interface AccidentRepository {
 
     boolean delete(int id);
 
+    boolean edit(Accident accident);
+
     Optional<Accident> findById(int id);
 
     Collection<Accident> findAll();

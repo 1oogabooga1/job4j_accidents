@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head th:include="fragments/header :: header"><title>Accident</title></head>
+<body>
+<div th:replace="fragments/navigation :: navigation"></div>
+<div class="container">
+    <form class="mt-3" th:action="@{/accidents/edit}" method="post" th:object="${accident}"
+          enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}">
+        <div class="mb-3">
+            <label for="title" class="form-label"><b>Title</b></label>
+            <input type="text" class="form-control" id="title" name="name"
+                   th:field="*{name}"
+                   placeholder="Accident name">
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label"><b>Address</b></label>
+            <input type="text" class="form-control" id="address" name="address"
+                   th:field="*{address}"
+                   placeholder="Accident address">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label"><b>Description</b></label>
+            <textarea class="form-control" id="description" name="description"
+                      th:field="*{description}" rows="5" placeholder="Accident description"></textarea>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-6"></div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-4">
+                        <button class="btn btn-success w-100" type="submit">Edit</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-danger w-100"
+                                type="submit"
+                                th:formaction="@{/accidents/delete/{id}(id=${accident.id})}"
+                                formmethod="post">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<footer th:include="fragments/footer :: footer"></footer>
+</body>
+</html>

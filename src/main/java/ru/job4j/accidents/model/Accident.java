@@ -13,6 +13,6 @@ public class Accident {
     @EqualsAndHashCode.Include
     private int id;
     private String name;
-    private String text;
+    private String description;
     private String address;
 }
