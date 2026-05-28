@@ -7,6 +7,9 @@ import ru.job4j.accidents.model.Accident;
 import ru.job4j.accidents.service.AccidentService;
 import org.springframework.ui.Model;
 import ru.job4j.accidents.service.AccidentTypeService;
+import ru.job4j.accidents.service.RuleService;
+
+import java.util.Set;
 
 @Controller
 @RequestMapping("/accidents")
@@ -16,6 +19,8 @@ public class AccidentController {
     private final AccidentService accidentService;
 
     private final AccidentTypeService typeService;
+
+    private final RuleService ruleService;
 
     @GetMapping("/list")
     public String getAllAccidents(Model model) {
@@ -28,17 +33,20 @@ public class AccidentController {
     public String getCreationPage(Model model) {
         model.addAttribute("user", "Dmitrii");
         model.addAttribute("types", typeService.findAll());
+        model.addAttribute("rules", ruleService.findAll());
         return "accidents/create";
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Accident accident, Model model) {
+    public String create(@ModelAttribute Accident accident,
+                         @RequestParam(required = false) Set<Integer> ruleIds,
+                         Model model) {
         try {
-            accidentService.create(accident);
+            accidentService.create(accident, ruleIds);
             return "redirect:/accidents/list";
         } catch (IllegalArgumentException e) {
             model.addAttribute("message", e.getMessage());
-            return "errors/404";
+            return "errors/400";
         }
     }
 
@@ -50,15 +58,18 @@ public class AccidentController {
             return "errors/404";
         }
         model.addAttribute("user", "Dmitrii");
+        model.addAttribute("rules", ruleService.findAll());
         model.addAttribute("accident", acc.get());
         model.addAttribute("types", typeService.findAll());
         return "accidents/accident";
     }
 
     @PostMapping("/edit")
-    public String edit(@ModelAttribute Accident accident, Model model) {
+    public String edit(@ModelAttribute Accident accident,
+                       @RequestParam(required = false) Set<Integer> ruleIds,
+                       Model model) {
         try {
-            var result = accidentService.edit(accident);
+            var result = accidentService.edit(accident, ruleIds);
             if (!result) {
                 model.addAttribute("message", "Some error occurred during edition");
                 return "errors/404";

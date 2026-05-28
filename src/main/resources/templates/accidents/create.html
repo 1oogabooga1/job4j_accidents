@@ -29,6 +29,21 @@
             </select>
         </div>
 
+        <div class="mb-3">
+            <label class="form-label"><b>Rules</b></label>
+            <div class="form-check" th:each="rule : ${rules}">
+                <input class="form-check-input"
+                       type="checkbox"
+                       name="ruleIds"
+                       th:id="'rule-' + ${rule.id}"
+                       th:value="${rule.id}">
+                <label class="form-check-label"
+                       th:for="'rule-' + ${rule.id}"
+                       th:text="${rule.name}">
+                </label>
+            </div>
+        </div>
+
         <div class="mb-3 row">
             <div class="col-6"></div>
             <div class="col-6">

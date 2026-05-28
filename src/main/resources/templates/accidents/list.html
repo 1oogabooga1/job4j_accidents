@@ -14,6 +14,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Address</th>
                 <th scope="col">Type</th>
+                <th scope="col">Rules</th>
             </tr>
             </thead>
             <tbody>
@@ -27,6 +28,11 @@
                 <td th:text="${accident.description}"></td>
                 <td th:text="${accident.address}"></td>
                 <td th:text="${accident.type.name}"></td>
+                <td>
+                    <span th:each="rule, stat : ${accident.rules}">
+                        <span th:text="${rule.name}"></span><span th:if="${!stat.last}">, </span>
+                    </span>
+                </td>
             </tr>
             </tbody>
         </table>
