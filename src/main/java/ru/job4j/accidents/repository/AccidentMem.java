@@ -16,15 +16,6 @@ public class AccidentMem implements AccidentRepository {
 
     private final AtomicInteger nextId = new AtomicInteger(0);
 
-    public AccidentMem() {
-        create(new Accident(0, "Illegal parking", "A car blocked the sidewalk.",
-                "Green Street, 12"));
-        create(new Accident(0, "Speeding", "The driver exceeded the speed limit near a school.",
-                "Central Avenue, 45"));
-        create(new Accident(0, "Red light violation", "The car crossed the road on a red light.",
-                "Main Road, 7"));
-    }
-
     @Override
     public Accident create(Accident accident) {
         accident.setId(nextId.incrementAndGet());
@@ -39,8 +30,8 @@ public class AccidentMem implements AccidentRepository {
 
     @Override
     public boolean edit(Accident accident) {
-        return accidents.computeIfPresent(accident.getId(), (id, oldAccident) -> new Accident(oldAccident.getId(),
-                accident.getName(), accident.getDescription(), accident.getAddress())) != null;
+        return accidents.computeIfPresent(accident.getId(), (id, oldAccident) -> new Accident(id,
+                accident.getName(), accident.getDescription(), accident.getAddress(), accident.getType())) != null;
     }
 
     @Override

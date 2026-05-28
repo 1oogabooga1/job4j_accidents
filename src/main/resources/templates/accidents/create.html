@@ -20,12 +20,21 @@
             <textarea class="form-control" id="description" rows="10" name="description"
                       placeholder="Accident description"></textarea>
         </div>
+
+        <div class="mb-3">
+            <label for="type"><b>Accident Type</b></label>
+            <select class="form-control" id="type" name="type.id">
+                <option th:each="type : ${types}"
+                        th:value="${type.id}" th:text="${type.name}"></option>
+            </select>
+        </div>
+
         <div class="mb-3 row">
             <div class="col-6"></div>
             <div class="col-6">
                 <div class="row">
                     <div class="col-6"><a class="btn btn-danger w-100"
-                                          th:href="@{/list}">Cancel</a></div>
+                                          th:href="@{/accidents/list}">Cancel</a></div>
                     <div class="col-6">
                         <button class="btn btn-primary w-100"
                                 type="submit">Save

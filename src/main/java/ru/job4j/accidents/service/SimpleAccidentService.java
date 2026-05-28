@@ -3,6 +3,7 @@ package ru.job4j.accidents.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.job4j.accidents.model.Accident;
+import ru.job4j.accidents.model.AccidentType;
 import ru.job4j.accidents.repository.AccidentRepository;
 
 import java.util.Collection;
@@ -14,8 +15,11 @@ public class SimpleAccidentService implements AccidentService {
 
     private final AccidentRepository repository;
 
+    private final AccidentTypeService typeService;
+
     @Override
     public Accident create(Accident accident) {
+        accident.setType(getExistingType(accident));
         return repository.create(accident);
     }
 
@@ -26,6 +30,7 @@ public class SimpleAccidentService implements AccidentService {
 
     @Override
     public boolean edit(Accident accident) {
+        accident.setType(getExistingType(accident));
         return repository.edit(accident);
     }
 
@@ -37,5 +42,13 @@ public class SimpleAccidentService implements AccidentService {
     @Override
     public Collection<Accident> findAll() {
         return repository.findAll();
+    }
+
+    private AccidentType getExistingType(Accident accident) {
+        if (accident.getType() == null) {
+            throw new IllegalArgumentException("The accident type is required");
+        }
+        return typeService.findById(accident.getType().getId())
+                .orElseThrow(() -> new IllegalArgumentException("The accident type does not exist"));
     }
 }
