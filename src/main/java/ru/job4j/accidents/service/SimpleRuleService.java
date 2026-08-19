@@ -13,25 +13,25 @@ import java.util.Set;
 @AllArgsConstructor
 public class SimpleRuleService implements RuleService {
 
-    private final RuleRepository repository;
+    private final RuleRepository ruleJdbcTemplate;
 
     @Override
     public Rule create(Rule rule) {
-        return repository.create(rule);
+        return ruleJdbcTemplate.create(rule);
     }
 
     @Override
     public Optional<Rule> findById(int id) {
-        return repository.findById(id);
+        return ruleJdbcTemplate.findById(id);
     }
 
     @Override
     public Collection<Rule> findAll() {
-        return repository.findAll();
+        return ruleJdbcTemplate.findAll();
     }
 
     @Override
     public Set<Rule> findRulesByIds(Set<Integer> ids) {
-        return repository.findRulesByIds(ids);
+        return ruleJdbcTemplate.findRulesByIds(ids);
     }
 }

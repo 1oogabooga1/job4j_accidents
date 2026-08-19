@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class SimpleAccidentService implements AccidentService {
 
-    private final AccidentRepository repository;
+    private final AccidentRepository accidentJdbcTemplate;
 
     private final AccidentTypeService typeService;
 
@@ -25,29 +25,29 @@ public class SimpleAccidentService implements AccidentService {
     public Accident create(Accident accident, Set<Integer> ruleIds) {
         accident.setRules(getExistingRules(ruleIds));
         accident.setType(getExistingType(accident));
-        return repository.create(accident);
+        return accidentJdbcTemplate.create(accident);
     }
 
     @Override
     public boolean delete(int id) {
-        return repository.delete(id);
+        return accidentJdbcTemplate.delete(id);
     }
 
     @Override
     public boolean edit(Accident accident, Set<Integer> ruleIds) {
         accident.setRules(getExistingRules(ruleIds));
         accident.setType(getExistingType(accident));
-        return repository.edit(accident);
+        return accidentJdbcTemplate.edit(accident);
     }
 
     @Override
     public Optional<Accident> findById(int id) {
-        return repository.findById(id);
+        return accidentJdbcTemplate.findById(id);
     }
 
     @Override
     public Collection<Accident> findAll() {
-        return repository.findAll();
+        return accidentJdbcTemplate.findAll();
     }
 
     private AccidentType getExistingType(Accident accident) {

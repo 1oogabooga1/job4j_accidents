@@ -12,20 +12,20 @@ import java.util.Optional;
 @AllArgsConstructor
 public class SimpleAccidentTypeService implements AccidentTypeService {
 
-    private final AccidentTypeRepository repository;
+    private final AccidentTypeRepository accidentTypeJdbcTemplate;
 
     @Override
     public AccidentType create(AccidentType type) {
-        return repository.create(type);
+        return accidentTypeJdbcTemplate.create(type);
     }
 
     @Override
     public Optional<AccidentType> findById(int id) {
-        return repository.findById(id);
+        return accidentTypeJdbcTemplate.findById(id);
     }
 
     @Override
     public Collection<AccidentType> findAll() {
-        return repository.findAll();
+        return accidentTypeJdbcTemplate.findAll();
     }
 }
