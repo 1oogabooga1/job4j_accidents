@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001" author="dmitrii">
+        <sqlFile path="scripts/001_ddl_create_types_table.sql"
+                 relativeToChangelogFile="true"/>
+        <rollback>
+            <sqlFile path="scripts/rollback/001_rollback_create_types_table.sql"
+                     relativeToChangelogFile="true"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="002" author="dmitrii">
+        <sqlFile path="scripts/002_ddl_create_rules_table.sql"
+                 relativeToChangelogFile="true"/>
+        <rollback>
+            <sqlFile path="scripts/rollback/002_rollback_create_rules_table.sql"
+                     relativeToChangelogFile="true"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="003" author="dmitrii">
+        <sqlFile path="scripts/003_ddl_create_accidents_table.sql"
+                 relativeToChangelogFile="true"/>
+        <rollback>
+            <sqlFile path="scripts/rollback/003_rollback_create_accidents_table.sql"
+                     relativeToChangelogFile="true"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="004" author="dmitrii">
+        <sqlFile path="scripts/004_ddl_create_accidents_rules_table.sql"
+                 relativeToChangelogFile="true"/>
+        <rollback>
+            <sqlFile path="scripts/rollback/004_rollback_create_accidents_rules_table.sql"
+                     relativeToChangelogFile="true"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="005" author="dmitrii">
+        <sqlFile path="scripts/005_dml_insert_types.sql"
+                 relativeToChangelogFile="true"/>
+        <rollback>
+            <sqlFile path="scripts/rollback/005_rollback_insert_types.sql"
+                     relativeToChangelogFile="true"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="006" author="dmitrii">
+        <sqlFile path="scripts/006_dml_insert_rules.sql"
+                 relativeToChangelogFile="true"/>
+        <rollback>
+            <sqlFile path="scripts/rollback/006_rollback_insert_rules.sql"
+                     relativeToChangelogFile="true"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="007" author="dmitrii">
+        <sqlFile path="scripts/007_dml_insert_accidents.sql"
+                 relativeToChangelogFile="true"/>
+        <rollback>
+            <sqlFile path="scripts/rollback/007_rollback_insert_accidents.sql"
+                     relativeToChangelogFile="true"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
